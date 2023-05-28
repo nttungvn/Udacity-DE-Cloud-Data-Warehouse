@@ -150,7 +150,7 @@ songplay_table_insert = ("""
 """)
 
 user_table_insert = ("""
-    INSERT INTO user (user_id, first_name, last_name, gender, level)
+    INSERT INTO users (user_id, first_name, last_name, gender, level)
     SELECT userid, firstname, lastname, gender, level
     FROM stagging_events
     ;
@@ -171,7 +171,7 @@ artist_table_insert = ("""
 """)
 
 time_table_insert = ("""
-    INSERT INTO time (start_time, hour, day, week, month, year, weekday)
+    INSERT INTO times (start_time, hour, day, week, month, year, weekday)
     SELECT DISTINCT(DATEADD(s, ts / 1000, '19700101')) AS start_time, 
         EXTRACT(HOUR FROM start_time) as hour,
         EXTRACT(DAY FROM start_time) as day,
