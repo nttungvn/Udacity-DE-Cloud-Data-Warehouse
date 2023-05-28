@@ -1,7 +1,7 @@
-```Summary```
+# Summary
 The project build ELT to extract data from S3 into Redshift and transform them into dimension table.
 
-### Stagging Tables
+# Stagging Tables
 "staging_events"
     "artist" varchar(1000),
     "auth" varchar(1000),
@@ -35,7 +35,7 @@ The project build ELT to extract data from S3 into Redshift and transform them i
     "year" int
 
 
-### Fact Table
+# Fact Table
 
 "songplay" 
     "songplay_id" int primary key,
@@ -48,7 +48,7 @@ The project build ELT to extract data from S3 into Redshift and transform them i
     "location" varchar(1000),
     "user_agent" varchar(1000)
 
-### Dimension Tables
+# Dimension Tables
 
 "users" 
     "user_id" int primary key,
@@ -80,6 +80,8 @@ The project build ELT to extract data from S3 into Redshift and transform them i
     "weekday" int
 
 
-### Step run
-#python3 create_tables.py
-#python3 etl.py
+# Step run
+```
+python3 create_tables.py
+python3 etl.py
+```
