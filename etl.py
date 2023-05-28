@@ -4,16 +4,20 @@ from sql_queries import copy_table_queries, insert_table_queries
 
 
 def load_staging_tables(cur, conn):
-    # Load data from S3 to redshift stagging table.
-    # Arg: cur: cursor of connection, conn: the connection
+    """
+    Load data from S3 to redshift stagging table.
+    Arg: cur: cursor of connection, conn: the connection
+    """
     for query in copy_table_queries:
         cur.execute(query)
         conn.commit()
 
 
 def insert_tables(cur, conn):
-    # Select data from stagging table and insert into demension table.
-    # Arg: cur: cursor of connection, conn: the connection
+    """
+    Select data from stagging table and insert into demension table.
+    Arg: cur: cursor of connection, conn: the connection
+    """
     for query in insert_table_queries:
         cur.execute(query)
         conn.commit()

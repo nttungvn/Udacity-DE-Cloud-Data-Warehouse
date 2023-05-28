@@ -25,18 +25,18 @@ CREATE TABLE "staging_events" (
     "gender" varchar(1000),
     "itemInSession" int,
     "lastName"  varchar(1000),
-    "length" varchar(1000),
+    "length" float,
     "level" varchar(1000),
     "location" varchar(1000),
     "method" varchar(1000),
     "page" varchar(1000),
-    "registration" varchar(1000),
+    "registration" float,
     "sessionId" int,
     "song" varchar(1000),
     "status" int,
     "ts" bigint,
     "userAgent" varchar(1000),
-    "userId" varchar(1000)
+    "userId" int
 );
 """)
 
@@ -60,9 +60,9 @@ CREATE TABLE "songplay" (
     "songplay_id" int primary key,
     "start_time" int,
     "user_id" int,
-    "level" int,
-    "song_id" int,
-    "artist_id" int,
+    "level" varchar(1000),
+    "song_id" varchar(1000),
+    "artist_id" varchar(1000),
     "session_id" int,
     "location" varchar(1000),
     "user_agent" varchar(1000)
@@ -84,17 +84,18 @@ CREATE TABLE "songs" (
     "song_id" int primary key,
     "title" varchar(1000),
     "year" int,
-    "duration" int
+    "artist_id" varchar(1000),
+    "duration" float
 );
 """)
 
 artist_table_create = ("""
 CREATE TABLE "artists" (
-    "artist_id" int primary key,
+    "artist_id" varchar(1000) primary key,
     "name" varchar(1000),
     "location" varchar(1000),
-    "latitube" varchar(1000),
-    "longitube" varchar(1000)
+    "latitube" float,
+    "longitube" float
 );
 """)
 

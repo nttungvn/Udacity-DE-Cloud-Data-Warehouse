@@ -1,3 +1,6 @@
+### Summary
+The project build ELT to extract data from S3 into Redshift and transform them into dimension table.
+
 ### Stagging Tables
 "staging_events"
     "artist" varchar(1000),
