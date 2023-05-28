@@ -81,5 +81,5 @@ The project build ELT to extract data from S3 into Redshift and transform them i
 
 
 # Step run
-```python3 create_tables.py
-python3 etl.py```
+$ python3 create_tables.py
+$ python3 etl.py
