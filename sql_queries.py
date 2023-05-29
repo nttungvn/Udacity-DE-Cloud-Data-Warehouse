@@ -196,7 +196,7 @@ time_table_insert = ("""
         EXTRACT(YEAR FROM start_time) as year,
         EXTRACT(WEEKDAY FROM start_time) as weekday
     FROM staging_events
-    WHERE e.page = 'NextSong'
+    WHERE staging_events.page = 'NextSong'
     ;
 """)
 
