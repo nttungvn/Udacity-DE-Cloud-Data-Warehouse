@@ -144,7 +144,7 @@ songplay_table_insert = ("""
         e.useragent user_agent
     FROM staging_events e
     JOIN staging_songs s
-    ON (e.artist = s.artist_name AND e.title = s.title AND e.length = s.duration)
+    ON (e.artist = s.artist_name AND e.song = s.title AND e.length = s.duration)
     WHERE e.page = 'NextSong'
     ;
 """)
@@ -196,6 +196,7 @@ time_table_insert = ("""
         EXTRACT(YEAR FROM start_time) as year,
         EXTRACT(WEEKDAY FROM start_time) as weekday
     FROM staging_events
+    WHERE e.page = 'NextSong'
     ;
 """)
 
