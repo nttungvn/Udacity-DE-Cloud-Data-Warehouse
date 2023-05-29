@@ -142,8 +142,8 @@ songplay_table_insert = ("""
         e.sessionId as session_id,
         e.location as location,
         e.useragent user_agent
-    FROM stagging_events e
-    JOIN stagging_songs s
+    FROM staging_events e
+    JOIN staging_songs s
     ON (e.artist = s.artist_name AND e.title = s.title AND e.length = s.duration)
     WHERE e.page = 'NextSong'
     ;
@@ -151,22 +151,38 @@ songplay_table_insert = ("""
 
 user_table_insert = ("""
     INSERT INTO users (user_id, first_name, last_name, gender, level)
-    SELECT userid, firstname, lastname, gender, level
-    FROM stagging_events
+    SELECT 
+        DISTINCT e.userid AS user_id,
+        e.firstname AS firstname,
+        e.lastname ASlastname,
+        e.gender AS gender,
+        e.level ASlevel
+    FROM staging_events e 
+    WHERE e.page = 'NextSong'
     ;
 """)
 
 song_table_insert = ("""
     INSERT INTO songs (song_id, title, artist_id, year, duration)
-    SELECT song_id, title, artist_id, year, duration
-    FROM stagging_songs
+    SELECT
+        DISTINCT s.song_id AS song_id,
+        s.title AS title,
+        s.artist_id AS artist_id,
+        s.year AS year,
+        s.duraction AS duration
+    FROM staging_songs s
     ;
 """)
 
 artist_table_insert = ("""
     INSERT INTO artists (artist_id, name, location, latitude, longitude)
-    SELECT artist_id, artist_name, artist_location, artist_latitude, artist_longitube
-    FROM stagging_song
+    SELECT 
+        DISTINCT s.artist_id AS artist_id,
+        s.artist_name AS artist_name,
+        s.artist_location AS artist_location,
+        s.artist_latitude AS artist_latitude,
+        s.artist_longitube AS artist_longitube
+    FROM staging_songs s
     ;
 """)
 
@@ -179,7 +195,7 @@ time_table_insert = ("""
         EXTRACT(MONTH FROM start_time) as month,
         EXTRACT(YEAR FROM start_time) as year,
         EXTRACT(WEEKDAY FROM start_time) as weekday
-    FROM stagging_events
+    FROM staging_events
     ;
 """)
 
