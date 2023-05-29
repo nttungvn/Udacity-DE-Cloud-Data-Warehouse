@@ -142,7 +142,7 @@ songplay_table_insert = ("""
         e.sessionId as session_id,
         e.location as location,
         e.useragent user_agent
-    FROM staging_events e
+    FROM staging_events AS e
     JOIN staging_songs s
     ON (e.artist = s.artist_name AND e.song = s.title AND e.length = s.duration)
     WHERE e.page = 'NextSong'
@@ -157,7 +157,7 @@ user_table_insert = ("""
         e.lastname ASlastname,
         e.gender AS gender,
         e.level ASlevel
-    FROM staging_events e 
+    FROM staging_events AS e 
     WHERE e.page = 'NextSong'
     ;
 """)
@@ -170,7 +170,7 @@ song_table_insert = ("""
         s.artist_id AS artist_id,
         s.year AS year,
         s.duraction AS duration
-    FROM staging_songs s
+    FROM staging_songs AS s
     ;
 """)
 
@@ -182,21 +182,21 @@ artist_table_insert = ("""
         s.artist_location AS artist_location,
         s.artist_latitude AS artist_latitude,
         s.artist_longitube AS artist_longitube
-    FROM staging_songs s
+    FROM staging_songs AS s
     ;
 """)
 
 time_table_insert = ("""
     INSERT INTO times (start_time, hour, day, week, month, year, weekday)
-    SELECT DISTINCT(DATEADD(s, ts / 1000, '19700101')) AS start_time, 
+    SELECT DISTINCT(DATEADD(s, e.ts / 1000, '19700101')) AS start_time, 
         EXTRACT(HOUR FROM start_time) as hour,
         EXTRACT(DAY FROM start_time) as day,
         EXTRACT(WEEK FROM start_time) as week,
         EXTRACT(MONTH FROM start_time) as month,
         EXTRACT(YEAR FROM start_time) as year,
         EXTRACT(WEEKDAY FROM start_time) as weekday
-    FROM staging_events
-    WHERE staging_events.page = 'NextSong'
+    FROM staging_events as e
+    WHERE e.page = 'NextSong'
     ;
 """)
 
